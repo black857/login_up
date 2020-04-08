@@ -3,17 +3,13 @@ import pickle           #写（读取）用户信息
 import random           #随机验证码
 import os               #用来写系统路径分割符和......
 
-#以只读二进制模式打开用户信息文件并读取
-os.chdir('E:\\python\\learnpython\\login_up')
-reload()
-
 errortime = 0                                                                             #记录输入密码时错误次数。
 find_score = 0                                                                            #记录找回密码时的分数
 error_information = []                                                                    #记录用户找回密码时填错的选项
 user_presence = False                                                                     #记录找回密码和注册时账号是否存在
 fields_find = ['账号','用户名','真实姓名','邮箱']                                         #记录找回密码时的选项
 fields_logup = ['账号','用名户','真实姓名','邮箱','密码','找回密码时的问题','问题的答案'] # 注册时的选项
-listcodes = os.listdir(r'E:/python/learnpython/login_up/code')                            #记录验证码的列表
+listcodes = os.listdir(r'E:/python/login_up/code')                                        #记录验证码的列表
 
 
 
@@ -140,33 +136,43 @@ def  log_up():
         else:
             break
 
-# 修改用户信息
-def modift():
-    while 1:
-        temp = gui.passwordbox(msg = '输入您想修改的账号及其密码',title = '----三思而后行----')
-        if captcha():
-            # 验证账号密码
-            for i in user.keys():
-                if i == temp[0]:
-                    # 检验密码
-                    if user[4] = temp[2]:
-                        # 登录成功
-                    else:
-                        # 失败
-                else:
-                    gui.msgbox(msg = '')
-            # 进入修改
+# # 修改用户信息
+# def modift():
+    # while 1:
+        # temp = gui.passwordbox(msg = '输入您想修改的账号及其密码',title = '----三思而后行----')
+        # if captcha():
+            # # 验证账号密码
+            # for i in user.keys():
+                # if i == temp[0]:
+                    # # 检验密码
+                    # if user[4] == temp[2]:
+                        # # 登录成功
+                        # modift_infor = gui.buttombox(msg = '请输入你要执行的操作',title = '选择',choices = ['注销','修改'])
+                        # if modift_infor == '修改':
+                            # modift_choice = gui.multenterbox(msg = '输入您要修改的信息:',title = '选择',choices = ['用户名','邮箱','密码','找回密码时的问题','问题的答案'])
+                            
+                            
+                    
+                    # else:
+                        # # 失败
+                # else:
+                    # gui.msgbox(msg = '')
+            # # 进入修改
         
-        else:
-            continue    
+        # else:
+            # continue    
         
-# 用于初始化用户信息
+# 初始化用户信息
 def reload(mode = 'rb'):
+    global user
     f = open('User',mode)
-    user = pickle.load(f)
+    if not mode == 'rb':
+        pass
+    else:
+        user = pickle.load(f)
     f.close()
 
-# 用于生成验证码
+# 生成验证码
 def captcha():
     while 1:
         # 随机验证码
@@ -184,7 +190,9 @@ def captcha():
         else:
             gui.msgbox(msg = '验证码输入有误',title = '错误')
 
-
+#以只读二进制模式打开用户信息文件并读取
+os.chdir(r'E:\python\login_up')
+reload()
 
 # 用户选择
 while 1:
